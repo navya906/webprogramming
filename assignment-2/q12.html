@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: skyblue;
+            font-family: Arial, sans-serif;
+            padding: 30px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0d1b5e;
+            font-size: 32px;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .student-info {
+            text-align: center;
+            color: #0d1b5e;
+            font-size: 14px;
+            margin-bottom: 24px;
+            font-weight: bold;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        nav a {
+            background-color: #0d1b5e;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        nav a:hover {
+            background-color: #1a2f9e;
+        }
+
+        /* Form */
+        form {
+            max-width: 750px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        /* Sections */
+        .section {
+            background-color: #0d1b5e;
+            color: white;
+            padding: 28px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+        }
+
+        .section h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: #cdd4f8;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: #e8ecff;
+            color: #0d1b5e;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            background-color: #ffffff;
+            box-shadow: 0 0 0 2px #7b8cde;
+        }
+
+        .row {
+            display: flex;
+            gap: 16px;
+        }
+
+        .row .form-group {
+            flex: 1;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #0d1b5e;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: background-color 0.2s;
+        }
+
+        .submit-btn:hover {
+            background-color: #1a2f9e;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Student Registration Portal</h1>
+    <p class="student-info">Navya Ghatta &mdash; 24bds0262</p>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#personal">Personal Information</a>
+        <a href="#academic">Academic Details</a>
+        <a href="#address">Address Information</a>
+        <a href="#credentials">Account Credentials</a>
+    </nav>
+
+    <!-- Registration Form -->
+    <form onsubmit="alert('Form Submitted Successfully'); return false;">
+
+        <!-- Section 1: Personal Information -->
+        <div class="section" id="personal">
+            <h2>Section 1: Personal Information</h2>
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" id="fullname" placeholder="Enter your full name">
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob">
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender">
+                        <option value="">-- Select Gender --</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email address">
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile Number</label>
+                <input type="text" id="mobile" placeholder="Enter your mobile number">
+            </div>
+        </div>
+
+        <!-- Section 2: Academic Details -->
+        <div class="section" id="academic">
+            <h2>Section 2: Academic Details</h2>
+            <div class="row">
+                <div class="form-group">
+                    <label for="regnum">Register Number</label>
+                    <input type="text" id="regnum" placeholder="e.g. 24bds0262">
+                </div>
+                <div class="form-group">
+                    <label for="degree">Degree Program</label>
+                    <input type="text" id="degree" placeholder="e.g. B.Tech">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <input type="text" id="department" placeholder="e.g. Computer Science">
+                </div>
+                <div class="form-group">
+                    <label for="year">Year of Study</label>
+                    <select id="year">
+                        <option value="">-- Select Year --</option>
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                        <option value="3">3rd Year</option>
+                        <option value="4">4th Year</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Address Information -->
+        <div class="section" id="address">
+            <h2>Section 3: Address Information</h2>
+            <div class="row">
+                <div class="form-group">
+                    <label for="doorno">Door Number</label>
+                    <input type="text" id="doorno" placeholder="e.g. 12A">
+                </div>
+                <div class="form-group">
+                    <label for="street">Street Name</label>
+                    <input type="text" id="street" placeholder="Enter street name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" placeholder="Enter city">
+                </div>
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" id="state" placeholder="Enter state">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pincode">Pincode</label>
+                <input type="text" id="pincode" placeholder="Enter pincode">
+            </div>
+        </div>
+
+        <!-- Section 4: Account Credentials -->
+        <div class="section" id="credentials">
+            <h2>Section 4: Account Credentials</h2>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Choose a username">
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Create a password">
+                </div>
+                <div class="form-group">
+                    <label for="confirmpass">Confirm Password</label>
+                    <input type="password" id="confirmpass" placeholder="Re-enter password">
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Submit Registration</button>
+
+    </form>
+
+</body>
+
+</html>

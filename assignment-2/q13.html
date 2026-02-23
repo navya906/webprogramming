@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickEats Food Delivery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        /* ── HEADER ── */
+        header {
+            background-color: #b71c1c;
+            color: white;
+            text-align: center;
+            padding: 18px 20px 14px;
+        }
+
+        header h1 {
+            font-size: 34px;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 15px;
+            margin-top: 5px;
+            color: #ffcdd2;
+        }
+
+        /* ── NAVBAR ── */
+        nav {
+            background-color: #7f0000;
+            display: flex;
+            justify-content: center;
+            gap: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            transition: background-color 0.2s;
+        }
+
+        nav a:hover {
+            background-color: #b71c1c;
+        }
+
+        /* ── WELCOME / HERO ── */
+        #home {
+            background: linear-gradient(135deg, #ff6f00, #e53935);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        #home h2 {
+            font-size: 38px;
+            margin-bottom: 16px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        #home p {
+            font-size: 17px;
+            max-width: 600px;
+            margin: 0 auto 28px;
+            color: #ffe0b2;
+            line-height: 1.6;
+        }
+
+        .order-btn {
+            background-color: white;
+            color: #e53935;
+            border: none;
+            padding: 14px 36px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .order-btn:hover {
+            background-color: #fbe9e7;
+        }
+
+        .hero-emoji {
+            font-size: 80px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* ── FOOD CATEGORIES ── */
+        #menu {
+            background-color: #fff8f0;
+            padding: 55px 40px;
+            text-align: center;
+        }
+
+        #menu h2 {
+            font-size: 28px;
+            color: #b71c1c;
+            margin-bottom: 8px;
+        }
+
+        #menu .sub {
+            font-size: 15px;
+            color: #888;
+            margin-bottom: 35px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .category-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 28px 16px 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-card .icon {
+            font-size: 52px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .category-card h3 {
+            font-size: 18px;
+            color: #b71c1c;
+            margin-bottom: 6px;
+        }
+
+        .category-card p {
+            font-size: 13px;
+            color: #777;
+        }
+
+        /* ── FEATURED DISHES ── */
+        #order-online {
+            background-color: #fff;
+            padding: 55px 40px;
+            text-align: center;
+        }
+
+        #order-online h2 {
+            font-size: 28px;
+            color: #b71c1c;
+            margin-bottom: 8px;
+        }
+
+        #order-online .sub {
+            font-size: 15px;
+            color: #888;
+            margin-bottom: 35px;
+        }
+
+        .dishes-grid {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .dish-card {
+            background-color: #fff8f0;
+            border: 1px solid #ffe0b2;
+            border-radius: 12px;
+            padding: 24px 20px;
+            width: 280px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            text-align: left;
+        }
+
+        .dish-card .dish-icon {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .dish-card h3 {
+            font-size: 19px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .dish-card p {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 14px;
+            line-height: 1.5;
+        }
+
+        .dish-card .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e53935;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .cart-btn {
+            background-color: #e53935;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+
+        .cart-btn:hover {
+            background-color: #b71c1c;
+        }
+
+        /* ── CONTACT ── */
+        #contact-us {
+            background-color: #fbe9e7;
+            padding: 55px 40px;
+            text-align: center;
+        }
+
+        #contact-us h2 {
+            font-size: 28px;
+            color: #b71c1c;
+            margin-bottom: 8px;
+        }
+
+        #contact-us .sub {
+            font-size: 15px;
+            color: #888;
+            margin-bottom: 35px;
+        }
+
+        .contact-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .contact-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 24px 28px;
+            width: 230px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-item .c-icon {
+            font-size: 36px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .contact-item h4 {
+            font-size: 16px;
+            color: #b71c1c;
+            margin-bottom: 6px;
+        }
+
+        .contact-item p {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .social-links {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .social-links a {
+            background-color: #b71c1c;
+            color: white;
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .social-links a:hover {
+            background-color: #7f0000;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background-color: #3e0000;
+            color: #ffcdd2;
+            text-align: center;
+            padding: 22px 20px;
+            border-top: 4px solid #b71c1c;
+        }
+
+        footer p {
+            font-size: 14px;
+            margin: 4px 0;
+        }
+
+        footer .brand {
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .student-info {
+            text-align: center;
+            background-color: #7f0000;
+            color: #ffcdd2;
+            padding: 6px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Section 1: Header -->
+    <header>
+        <h1>🍕 QuickEats Food Delivery</h1>
+        <p>Hot, Fresh & Fast — Right at Your Doorstep!</p>
+    </header>
+
+    <!-- Section 2: Navigation Bar -->
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#order-online">Order Online</a>
+        <a href="#contact-us">Contact Us</a>
+    </nav>
+
+    <!-- Section 3: Welcome / Hero -->
+    <section id="home">
+        <span class="hero-emoji">🛵</span>
+        <h2>Delicious Food Delivered to Your Doorstep</h2>
+        <p>From mouth-watering pizzas to rich biryanis, QuickEats brings your favourite restaurant meals straight to
+            your home within 30 minutes — hot, fresh, and full of flavour.</p>
+        <a href="#order-online" class="order-btn">🍽️ Order Now</a>
+    </section>
+
+    <!-- Section 4: Food Categories -->
+    <section id="menu">
+        <h2>Explore Our Categories</h2>
+        <p class="sub">Choose from a wide variety of cuisines and dishes</p>
+        <div class="categories-grid">
+            <div class="category-card">
+                <span class="icon">🍕</span>
+                <h3>Pizza</h3>
+                <p>Cheesy, crispy, and loaded with your favourite toppings.</p>
+            </div>
+            <div class="category-card">
+                <span class="icon">🍔</span>
+                <h3>Burgers</h3>
+                <p>Juicy patties with fresh veggies, sauces and toasted buns.</p>
+            </div>
+            <div class="category-card">
+                <span class="icon">🍛</span>
+                <h3>Biryani</h3>
+                <p>Aromatic, spiced rice with tender meat or veggies.</p>
+            </div>
+            <div class="category-card">
+                <span class="icon">🍰</span>
+                <h3>Desserts</h3>
+                <p>Sweet endings — cakes, ice creams, and more.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Featured Menu / Popular Dishes -->
+    <section id="order-online">
+        <h2>Popular Dishes</h2>
+        <p class="sub">Our most-loved dishes, freshly prepared for you</p>
+        <div class="dishes-grid">
+            <div class="dish-card">
+                <span class="dish-icon">🍕</span>
+                <h3>Margherita Pizza</h3>
+                <p>Classic thin-crust pizza with rich tomato sauce, fresh mozzarella, and basil leaves.</p>
+                <span class="price">₹299</span>
+                <button class="cart-btn" onclick="alert('Margherita Pizza added to cart!')">🛒 Add to Cart</button>
+            </div>
+            <div class="dish-card">
+                <span class="dish-icon">🍛</span>
+                <h3>Chicken Biryani</h3>
+                <p>Slow-cooked basmati rice layered with spiced chicken, saffron, and caramelised onions.</p>
+                <span class="price">₹249</span>
+                <button class="cart-btn" onclick="alert('Chicken Biryani added to cart!')">🛒 Add to Cart</button>
+            </div>
+            <div class="dish-card">
+                <span class="dish-icon">🍔</span>
+                <h3>Smoky BBQ Burger</h3>
+                <p>Double patty smash burger with smoky BBQ sauce, cheddar cheese and crispy lettuce.</p>
+                <span class="price">₹199</span>
+                <button class="cart-btn" onclick="alert('Smoky BBQ Burger added to cart!')">🛒 Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Contact Information -->
+    <section id="contact-us">
+        <h2>Contact Us</h2>
+        <p class="sub">We're available 24/7 to serve you</p>
+        <div class="contact-grid">
+            <div class="contact-item">
+                <span class="c-icon">📞</span>
+                <h4>Phone</h4>
+                <p>+91 98765 43210</p>
+            </div>
+            <div class="contact-item">
+                <span class="c-icon">📧</span>
+                <h4>Email</h4>
+                <p>support@quickeats.in</p>
+            </div>
+            <div class="contact-item">
+                <span class="c-icon">📍</span>
+                <h4>Location</h4>
+                <p>Serving all across Chennai, Tamil Nadu</p>
+            </div>
+        </div>
+        <div class="social-links">
+            <a href="#">📘 Facebook</a>
+            <a href="#">📸 Instagram</a>
+            <a href="#">🐦 Twitter</a>
+        </div>
+    </section>
+
+    <!-- Section 7: Footer -->
+    <div class="student-info">Navya Ghatta &mdash; 24bds0262</div>
+    <footer>
+        <p class="brand">🍕 QuickEats Food Delivery</p>
+        <p>© 2025 QuickEats. All rights reserved.</p>
+        <p>Made with ❤️ for food lovers everywhere.</p>
+    </footer>
+
+</body>
+
+</html>

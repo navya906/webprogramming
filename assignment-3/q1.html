@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Basic Hello World</title>
+</head>
+
+<body>
+    <p1>Navya Ghatta 24bds0262</p1>
+    <!-- Basic UI Elements -->
+    <div id="target">
+        Original Content
+    </div>
+
+    <br>
+
+    <!-- Requirement: Event handling (onclick) -->
+    <button onclick="displayHello()">Click Me</button>
+
+    <script>
+        // Requirement: Function declaration
+        function displayHello() {
+
+            // Requirement: Variable (var) and DOM access (document.getElementById)
+            var element = document.getElementById("target");
+
+            if (element) {
+                // Requirement: outerHTML property
+                // This replaces the <div> with an <h1>
+                element.outerHTML = '<h1 id="target">Hello, world!</h1>';
+            }
+        }
+    </script>
+
+</body>
+
+</html>

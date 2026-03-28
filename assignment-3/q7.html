@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q7 - Print Numbers 1 to N</title>
+</head>
+
+<body>
+    <p>Navya Ghatta 24bds0262</p>
+    <h2>Print Numbers from 1 to N</h2>
+
+    Enter N: <input type="number" id="nValue"><br><br>
+    <button onclick="printNumbers()">Print Numbers</button>
+
+    <div id="output"></div>
+
+    <script>
+        function printNumbers() {
+            var n = parseInt(document.getElementById("nValue").value);
+            var counter = 1;
+            var result = "";
+
+            while (counter <= n) {
+                result += counter;
+                if (counter < n) {
+                    result += ", ";
+                }
+                counter++;
+            }
+
+            document.getElementById("output").innerHTML = "<h3>Numbers from 1 to " + n + ":</h3>" + result;
+        }
+    </script>
+
+</body>
+
+</html>

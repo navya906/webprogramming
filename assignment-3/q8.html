@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q8 - Multiplication Table</title>
+</head>
+
+<body>
+    <p>Navya Ghatta 24bds0262</p>
+    <h2>Multiplication Table</h2>
+
+    Enter a number: <input type="number" id="numInput"><br><br>
+    <button onclick="printTable()">Print Table</button>
+
+    <div id="output"></div>
+
+    <script>
+        function printTable() {
+            var num = parseInt(document.getElementById("numInput").value);
+            var i = 1;
+            var result = "<h3>Multiplication Table of " + num + "</h3>";
+
+            do {
+                result += num + " x " + i + " = " + (num * i) + "<br>";
+                i++;
+            } while (i <= 10);
+
+            document.getElementById("output").innerHTML = result;
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q5 - Simple Calculator</title>
+</head>
+
+<body>
+    <p>Navya Ghatta 24bds0262</p>
+    <h2>Simple Calculator</h2>
+
+    Number 1: <input type="number" id="num1" step="any"><br><br>
+    Number 2: <input type="number" id="num2" step="any"><br><br>
+
+    <button onclick="calculate('add')">Add</button>
+    <button onclick="calculate('subtract')">Subtract</button>
+    <button onclick="calculate('multiply')">Multiply</button>
+    <button onclick="calculate('divide')">Divide</button>
+
+    <div id="output"></div>
+
+    <script>
+        function calculate(operation) {
+            var num1 = parseFloat(document.getElementById("num1").value);
+            var num2 = parseFloat(document.getElementById("num2").value);
+            var result;
+
+            switch (operation) {
+                case 'add':
+                    result = num1 + num2;
+                    document.getElementById("output").innerHTML = "Result: " + num1 + " + " + num2 + " = " + result;
+                    break;
+                case 'subtract':
+                    result = num1 - num2;
+                    document.getElementById("output").innerHTML = "Result: " + num1 + " - " + num2 + " = " + result;
+                    break;
+                case 'multiply':
+                    result = num1 * num2;
+                    document.getElementById("output").innerHTML = "Result: " + num1 + " x " + num2 + " = " + result;
+                    break;
+                case 'divide':
+                    if (num2 == 0) {
+                        document.getElementById("output").innerHTML = "Error: Division by zero is not allowed!";
+                    } else {
+                        result = num1 / num2;
+                        document.getElementById("output").innerHTML = "Result: " + num1 + " / " + num2 + " = " + result;
+                    }
+                    break;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

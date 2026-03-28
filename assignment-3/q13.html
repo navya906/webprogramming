@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q13 - Product Order Form</title>
+    <style>
+        fieldset {
+            margin-bottom: 20px;
+            padding: 10px;
+            width: 300px;
+        }
+        legend {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Navya Ghatta 24bds0262</p>
+    <h2>Product Order Form</h2>
+
+    <form id="orderForm">
+        <!-- Multiple fieldsets: Electronics -->
+        <fieldset>
+            <legend>Electronics</legend>
+            <input type="checkbox" name="product" value="899.99"> Laptop ($899.99)<br>
+            <input type="checkbox" name="product" value="599.50"> Smartphone ($599.50)<br>
+            <input type="checkbox" name="product" value="199.00"> Smartwatch ($199.00)<br>
+        </fieldset>
+
+        <!-- Multiple fieldsets: Accessories -->
+        <fieldset>
+            <legend>Accessories</legend>
+            <input type="checkbox" name="product" value="49.99"> Wireless Mouse ($49.99)<br>
+            <input type="checkbox" name="product" value="129.99"> Mechanical Keyboard ($129.99)<br>
+            <input type="checkbox" name="product" value="25.00"> Laptop Sleeve ($25.00)<br>
+        </fieldset>
+
+        <button type="button" onclick="calculateTotal()">Calculate Total</button>
+    </form>
+
+    <div id="output" style="margin-top: 20px; font-weight: bold; font-size: 1.2em;"></div>
+
+    <script>
+        function calculateTotal() {
+            // Select all checked checkboxes
+            const selectedItems = document.querySelectorAll('input[name="product"]:checked');
+            let totalPrice = 0;
+
+            // Using the modern for...of loop to iterate through the NodeList
+            for (const item of selectedItems) {
+                // parseFloat() for price conversion and dynamic calculation
+                totalPrice += parseFloat(item.value);
+            }
+
+            // Displaying the final result dynamically
+            document.getElementById("output").innerHTML = "Total Price: $" + totalPrice.toFixed(2);
+        }
+    </script>
+</body>
+
+</html>

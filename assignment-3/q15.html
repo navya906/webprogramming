@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q15 - Dynamic Font Customization Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #previewArea {
+            /* Initial CSS properties */
+            font-size: 24px;
+            color: #000000;
+            background-color: #ffffff;
+            /* Container styling */
+            padding: 30px;
+            border: 2px solid #ccc;
+            margin-bottom: 25px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        fieldset {
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 8px;
+            margin: auto;
+        }
+
+        legend {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .control-group {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        input[type="range"] {
+            width: 150px;
+        }
+
+        input[type="color"] {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Navya Ghatta 24bds0262</p>
+    <h2>Dynamic Font Customization</h2>
+
+    <!-- Output preview area -->
+    <div id="previewArea">
+        The quick brown fox jumps over the lazy dog.
+    </div>
+
+    <!-- fieldset grouping for controls -->
+    <fieldset>
+        <legend>Style Customizer</legend>
+
+        <div class="control-group">
+            <label for="fontSize">Font Size (<span id="sizeLabel">24</span>px):</label>
+            <!-- Range slider input -->
+            <input type="range" id="fontSize" min="10" max="100" value="24" oninput="updateStyling()">
+        </div>
+
+        <div class="control-group">
+            <label for="textColor">Text Color:</label>
+            <!-- Color picker input for font -->
+            <input type="color" id="textColor" value="#000000" oninput="updateStyling()">
+        </div>
+
+        <div class="control-group">
+            <label for="bgColor">Background Color:</label>
+            <!-- Color picker input for background -->
+            <input type="color" id="bgColor" value="#ffffff" oninput="updateStyling()">
+        </div>
+    </fieldset>
+
+    <script>
+        function updateStyling() {
+            var targetDiv = document.getElementById("previewArea");
+            
+            // Get current values from the form inputs
+            var sizeValue = document.getElementById("fontSize").value;
+            var colorValue = document.getElementById("textColor").value;
+            var bgValue = document.getElementById("bgColor").value;
+
+            // Optional: Update the label showing exact pixel size
+            document.getElementById("sizeLabel").innerText = sizeValue;
+
+            // Dynamic property changes using the 'style' property for inline CSS
+            targetDiv.style.fontSize = sizeValue + "px";
+            targetDiv.style.color = colorValue;
+            targetDiv.style.backgroundColor = bgValue;
+        }
+    </script>
+</body>
+
+</html>

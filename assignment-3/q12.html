@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q12 - Job Skills Validation</title>
+</head>
+
+<body>
+    <p>Navya Ghatta 24bds0262</p>
+    <h2>Job Skills Form</h2>
+
+    <form id="skillsForm">
+        <p>Select at least 3 skills:</p>
+        <input type="checkbox" name="skill" value="Java"> Java<br>
+        <input type="checkbox" name="skill" value="Python"> Python<br>
+        <input type="checkbox" name="skill" value="HTML"> HTML<br>
+        <input type="checkbox" name="skill" value="JavaScript"> JavaScript<br>
+        <input type="checkbox" name="skill" value="SQL"> SQL<br><br>
+
+        <button type="button" onclick="validateForm()">Submit</button>
+    </form>
+
+    <div id="output" style="margin-top: 20px; font-weight: bold;"></div>
+
+    <script>
+        function validateForm() {
+            var form = document.getElementById("skillsForm");
+            var checkboxes = document.getElementsByName("skill");
+            var selectedSkills = [];
+            var lastCheckbox = checkboxes[checkboxes.length - 1];
+
+            // for loop with index to collect checked items
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    selectedSkills.push(checkboxes[i].value);
+                }
+            }
+
+            // Array length property for Checkbox validation
+            if (selectedSkills.length < 3) {
+                // Set custom validation message to fail checkValidity()
+                lastCheckbox.setCustomValidity("You must select at least 3 skills.");
+            } else {
+                // Clear validation error to pass checkValidity()
+                lastCheckbox.setCustomValidity("");
+            }
+
+            // checkValidity() method evaluates if the form passes constraints
+            if (!form.checkValidity()) {
+                document.getElementById("output").innerHTML = "<span style='color:red;'>Error: Please select at least 3 skills.</span>";
+                // Optionally trigger browser default tooltip as well:
+                form.reportValidity();
+            } else {
+                // String concatenation to build the result
+                var resultMessage = "Successfully validated! Your selected skills: ";
+                for (var j = 0; j < selectedSkills.length; j++) {
+                    resultMessage += selectedSkills[j];
+                    if (j < selectedSkills.length - 1) {
+                        resultMessage += ", ";
+                    }
+                }
+                document.getElementById("output").innerHTML = "<span style='color:green;'>" + resultMessage + "</span>";
+            }
+        }
+    </script>
+</body>
+
+</html>

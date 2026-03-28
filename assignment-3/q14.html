@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q14 - Text Styling Application</title>
+    <style>
+        /* Predefined CSS classes */
+        .base-text {
+            font-size: 24px;
+            font-family: Arial, sans-serif;
+            padding: 15px;
+            border: 2px dashed #999;
+            margin-bottom: 20px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .bold-text {
+            font-weight: bold;
+        }
+
+        .italic-text {
+            font-style: italic;
+        }
+
+        .small-caps-text {
+            font-variant: small-caps;
+        }
+
+        fieldset {
+            width: 350px;
+            padding: 15px;
+        }
+
+        legend {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        button {
+            margin: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Navya Ghatta 24bds0262</p>
+    <h2>Text Styling Application</h2>
+
+    <!-- The target message container -->
+    <div id="messageBox" class="base-text">This is a sample message to style.</div>
+
+    <!-- Grouping controls using fieldset and legend -->
+    <fieldset>
+        <legend>Style Options</legend>
+        <button onclick="applyStyle('bold-text')">Bold</button>
+        <button onclick="applyStyle('italic-text')">Italic</button>
+        <button onclick="applyStyle('small-caps-text')">Small Caps</button>
+        <br><br>
+        <button onclick="applyAllStyles()">Apply All (Multiple Classes)</button>
+        <button onclick="resetStyles()">Reset Styles</button>
+    </fieldset>
+
+    <script>
+        function applyStyle(styleClass) {
+            // Using the className property to apply a specific predefined CSS class (keeping the base styling)
+            document.getElementById("messageBox").className = "base-text " + styleClass;
+        }
+
+        function applyAllStyles() {
+            // Multiple class assignment: changing className to include all styles together
+            document.getElementById("messageBox").className = "base-text bold-text italic-text small-caps-text";
+        }
+
+        function resetStyles() {
+            // Reverting the className property to its default state
+            document.getElementById("messageBox").className = "base-text";
+        }
+    </script>
+</body>
+
+</html>

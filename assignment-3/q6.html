@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q6 - Student Information System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        button {
+            padding: 8px 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        input, select {
+            padding: 5px;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Navya Ghatta 24bds0262</p>
+    <h2>Student Information System</h2>
+
+    <form id="studentForm">
+        Name: <input type="text" id="studentName"><br><br>
+        Roll No: <input type="number" id="rollNo"><br><br>
+        Course:
+        <select id="course">
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="ME">ME</option>
+            <option value="CE">CE</option>
+        </select><br><br>
+        Marks: <input type="number" id="marks" step="any"><br><br>
+
+        <button type="button" onclick="addStudent()">Add Student</button>
+        <button type="button" onclick="resetForm()">Reset</button>
+    </form>
+
+    <h3>Student Records</h3>
+    <div id="output"></div>
+    <br>
+    <button onclick="displayAll()">Display All</button>
+    <button onclick="calculateAverage()">Calculate Average</button>
+    <div id="result"></div>
+
+    <script>
+        var studentList = [];
+        var studentCount = 0;
+
+        var student = {
+            name: "",
+            rollNo: 0,
+            course: "",
+            marks: 0,
+            getInfo: function() {
+                return this.name + " (Roll No: " + this.rollNo + ") - " + this.course + " - Marks: " + this.marks;
+            }
+        };
+
+        function createStudent(name, rollNo, course, marks) {
+            var newStudent = {
+                name: name,
+                rollNo: rollNo,
+                course: course,
+                marks: marks,
+                getInfo: function() {
+                    return this.name + " (Roll No: " + this.rollNo + ") - " + this.course + " - Marks: " + this.marks;
+                }
+            };
+            return newStudent;
+        }
+
+        function addStudent() {
+            var nameVal = document.getElementById("studentName").value;
+            var rollVal = parseInt(document.getElementById("rollNo").value);
+            var courseVal = document.getElementById("course").value;
+            var marksVal = parseFloat(document.getElementById("marks").value);
+
+            if (nameVal == "" || isNaN(rollVal) || isNaN(marksVal)) {
+                document.getElementById("result").innerHTML = "Please fill all fields correctly!";
+                return;
+            }
+
+            var newStudent = createStudent(nameVal, rollVal, courseVal, marksVal);
+            studentList.push(newStudent);
+            studentCount++;
+
+            document.getElementById("result").innerHTML = "Student added: " + newStudent.getInfo();
+            displayAll();
+            resetForm();
+        }
+
+        function displayAll() {
+            if (studentList.length == 0) {
+                document.getElementById("output").innerHTML = "No students added yet.";
+                return;
+            }
+
+            var table = "<table>";
+            table += "<tr><th>S.No</th><th>Name</th><th>Roll No</th><th>Course</th><th>Marks</th></tr>";
+
+            for (var i = 0; i < studentList.length; i++) {
+                table += "<tr>";
+                table += "<td>" + (i + 1) + "</td>";
+                table += "<td>" + studentList[i].name + "</td>";
+                table += "<td>" + studentList[i].rollNo + "</td>";
+                table += "<td>" + studentList[i].course + "</td>";
+                table += "<td>" + studentList[i].marks + "</td>";
+                table += "</tr>";
+            }
+
+            table += "</table>";
+            document.getElementById("output").innerHTML = table;
+        }
+
+        function calculateAverage() {
+            if (studentList.length == 0) {
+                document.getElementById("result").innerHTML = "No students to calculate average.";
+                return;
+            }
+
+            var totalMarks = 0;
+            for (var i = 0; i < studentList.length; i++) {
+                totalMarks += studentList[i].marks;
+            }
+            var averageMarks = totalMarks / studentList.length;
+
+            document.getElementById("result").innerHTML = "Total Students: " + studentCount + "<br>Average Marks: " + averageMarks.toFixed(2);
+        }
+
+        function resetForm() {
+            document.getElementById("studentForm").reset();
+            document.getElementById("studentName").focus();
+        }
+    </script>
+
+</body>
+
+</html>

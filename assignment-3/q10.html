@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q10 - Checkbox Selection</title>
+</head>
+
+<body>
+    <p>Navya Ghatta 24bds0262</p>
+    <h2>Select Subjects</h2>
+
+    <input type="checkbox" name="subject" value="Math"> Math<br>
+    <input type="checkbox" name="subject" value="Science"> Science<br>
+    <input type="checkbox" name="subject" value="History"> History<br>
+    <input type="checkbox" name="subject" value="English"> English<br><br>
+
+    <button onclick="countSelections()">Submit</button>
+
+    <div id="output" style="margin-top: 20px; font-weight: bold;"></div>
+
+    <script>
+        function countSelections() {
+            var checkboxes = document.getElementsByName("subject");
+            var selectedValues = []; // Array to store selected values
+            var count = 0; // Counter variable for counting selections
+
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) { // Check if checkbox is selected
+                    count++;
+                    selectedValues.push(checkboxes[i].value); // Using push() to add elements
+                }
+            }
+
+            var resultHTML = "Total subjects selected: " + count + "<br>";
+            
+            if (count > 0) {
+                // Using join() to convert array to string
+                resultHTML += "Selected subjects: " + selectedValues.join(", ");
+            } else {
+                resultHTML += "No subjects were selected.";
+            }
+
+            document.getElementById("output").innerHTML = resultHTML;
+        }
+    </script>
+</body>
+
+</html>

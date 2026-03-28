@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Email Generator - Assignment 3</title>
+</head>
+
+<body>
+    <p>Navya Ghatta 24bds0262</p>
+    <h1>Email Address Generator</h1>
+
+    <form>
+        First Name: <input type="text" name="fname"><br><br>
+        Last Name: <input type="text" name="lname"><br><br>
+        <input type="button" value="Generate Email" onclick="generateEmail(this.form)">
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        function generateEmail(myForm) {
+            // Requirement: form.elements access
+            var firstName = myForm.elements["fname"].value;
+            var lastName = myForm.elements["lname"].value;
+
+            if (firstName && lastName) {
+                // Requirement: String concatenation (+ operator)
+                var email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@park.edu";
+
+                // Requirement: innerHTML to display result
+                document.getElementById("result").innerHTML = "<h3>Generated Email: " + email + "</h3>";
+
+                // Requirement: reset() method to clear form
+                myForm.reset();
+
+                // Requirement: focus() method to set focus back to first name
+                myForm.elements["fname"].focus();
+            } else {
+                alert("Please enter both first and last names.");
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q4 - Area of a Rectangle</title>
+</head>
+
+<body>
+    <p>Navya Ghatta 24bds0262</p>
+    <h2>Area of a Rectangle</h2>
+    Length: <input type="text" id="lengthInput"><br><br>
+    Width: <input type="text" id="widthInput"><br><br>
+    <button onclick="calculateArea()">Calculate Area</button>
+    <div id="output"></div>
+
+    <script>
+        function calculateArea() {
+            var userLength = document.getElementById("lengthInput").value;
+            var userWidth = document.getElementById("widthInput").value;
+
+            var rectLength = parseFloat(userLength);
+            var rectWidth = parseFloat(userWidth);
+            var rectArea = rectLength * rectWidth;
+
+            var result = "Length = " + rectLength + "<br>";
+            result += "Width = " + rectWidth + "<br>";
+            result += "Area = " + rectLength + " x " + rectWidth + " = " + rectArea;
+
+            document.getElementById("output").innerHTML = result;
+        }
+    </script>
+
+</body>
+
+</html>

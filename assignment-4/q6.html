@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Weather Dashboard</title>
+    <!-- Load React, ReactDOM, and Babel -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #e0f7fa;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .app-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Header Component Styling */
+        .header h1 {
+            color: #006064;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 28px;
+        }
+
+        /* Search Component Styling */
+        .search-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .search-container input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #b2ebf2;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-container input:focus {
+            border-color: #00bcd4;
+        }
+
+        .search-container button {
+            padding: 12px 20px;
+            background-color: #00bcd4;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-container button:hover {
+            background-color: #0097a7;
+        }
+
+        /* Dashboard Component Styling */
+        .dashboard {
+            background-color: #e0f2f1;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: left;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .dashboard h2 {
+            margin-top: 0;
+            color: #004d40;
+            border-bottom: 2px solid #80cbc4;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .weather-detail {
+            display: flex;
+            justify-content: space-between;
+            margin: 12px 0;
+            font-size: 16px;
+        }
+
+        .error-message {
+            color: #d32f2f;
+            background-color: #ffebee;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .loading {
+            color: #00796b;
+            font-style: italic;
+            margin: 20px 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // ==========================================
+        // UTILITY MODULE
+        // Handle API requests & process weather data
+        // ==========================================
+        const WeatherUtils = {
+            fetchWeatherData: async (city) => {
+                // Using Open-Meteo which is 100% free and requires no API key!
+
+                // Step 1: Geocoding the city to get latitude/longitude
+                const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`);
+                const geoData = await geoRes.json();
+
+                if (!geoData.results || geoData.results.length === 0) {
+                    throw new Error('City not found.');
+                }
+
+                const { latitude, longitude, name, country } = geoData.results[0];
+
+                // Step 2: Fetch the actual weather measurements
+                const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code`);
+                const weatherData = await weatherRes.json();
+                const current = weatherData.current;
+
+                // Simple interpretation map for the raw weather_code
+                const wmoMap = {
+                    0: 'Clear sky ☀️', 1: 'Mainly clear 🌤️', 2: 'Partly cloudy ⛅', 3: 'Overcast ☁️',
+                    45: 'Fog 🌫️', 48: 'Depositing rime fog 🌫️', 51: 'Light drizzle 🌧️',
+                    53: 'Moderate drizzle 🌧️', 55: 'Dense drizzle 🌧️', 61: 'Slight rain 🌧️',
+                    63: 'Moderate rain 🌧️', 65: 'Heavy rain 🌧️', 71: 'Slight snowfall 🌨️',
+                    73: 'Moderate snowfall 🌨️', 75: 'Heavy snowfall 🌨️', 80: 'Slight rain showers 🌦️',
+                    81: 'Moderate rain showers ⛈️', 82: 'Violent rain showers ⛈️', 95: 'Thunderstorm 🌩️'
+                };
+
+                return {
+                    city: `${name}, ${country}`,
+                    temperature: current.temperature_2m.toFixed(1),
+                    description: wmoMap[current.weather_code] || 'Unknown conditions',
+                    humidity: current.relative_humidity_2m,
+                    windSpeed: current.wind_speed_10m.toFixed(1)
+                };
+            }
+        };
+
+        // ==========================================
+        // REACT COMPONENTS
+        // ==========================================
+
+        // 1. Header Component
+        const Header = () => {
+            return (
+                <div className="header">
+                    <h1>🌤️ Weather Dashboard</h1>
+                </div>
+            );
+        };
+
+        // 2. Search Component
+        const Search = ({ onSearch }) => {
+            const [cityInput, setCityInput] = useState('');
+
+            const handleSearchClick = () => {
+                if (cityInput.trim() !== '') {
+                    onSearch(cityInput);
+                }
+            };
+
+            const handleKeyPress = (e) => {
+                if (e.key === 'Enter') handleSearchClick();
+            };
+
+            return (
+                <div className="search-container">
+                    <input
+                        type="text"
+                        placeholder="Enter a city name..."
+                        value={cityInput}
+                        onChange={(e) => setCityInput(e.target.value)}
+                        onKeyPress={handleKeyPress}
+                    />
+                    <button onClick={handleSearchClick}>Search</button>
+                </div>
+            );
+        };
+
+        // 3. Dashboard Component
+        const Dashboard = ({ weatherData }) => {
+            if (!weatherData) return null; // Don't render until data exists
+
+            return (
+                <div className="dashboard">
+                    <h2>{weatherData.city}</h2>
+                    <div className="weather-detail">
+                        <span><strong>Temperature:</strong></span>
+                        <span>{weatherData.temperature}°C</span>
+                    </div>
+                    <div className="weather-detail">
+                        <span><strong>Conditions:</strong></span>
+                        <span>{weatherData.description}</span>
+                    </div>
+                    <div className="weather-detail">
+                        <span><strong>Humidity:</strong></span>
+                        <span>{weatherData.humidity}%</span>
+                    </div>
+                    <div className="weather-detail">
+                        <span><strong>Wind Speed:</strong></span>
+                        <span>{weatherData.windSpeed} km/h</span>
+                    </div>
+                </div>
+            );
+        };
+
+        // Main App Component (orchestrating the 3 required components)
+        const App = () => {
+            const [weather, setWeather] = useState(null);
+            const [loading, setLoading] = useState(false);
+            const [error, setError] = useState(null);
+
+            const performSearch = async (city) => {
+                setLoading(true);
+                setError(null);
+                setWeather(null);
+
+                try {
+                    // Utilizing the Utility Module mapped out earlier
+                    const data = await WeatherUtils.fetchWeatherData(city);
+                    setWeather(data);
+                } catch (err) {
+                    setError('Failed to fetch weather. Please ensure the city exists and try again.');
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            return (
+                <div className="app-container">
+                    {/* Implemented individual components */}
+                    <Header />
+                    <Search onSearch={performSearch} />
+
+                    {loading && <p className="loading">Fetching current weather data...</p>}
+                    {error && <p className="error-message">{error}</p>}
+
+                    <Dashboard weatherData={weather} />
+                </div>
+            );
+        };
+
+        // Render Application
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>
